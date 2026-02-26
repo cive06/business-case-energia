@@ -3,71 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analisi Investimento Energia</title>
+    <title>Energy Investment Strategy - Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body { background-color: #0f172a; color: #f8fafc; font-family: sans-serif; }
-        .card { background-color: #1e293b; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
-        input, select { background: #334155; border: 1px solid #475569; color: white; padding: 8px; border-radius: 6px; width: 100%; }
-        .highlight { color: #38bdf8; font-weight: bold; }
-        .sabatini-active { color: #fbbf24; font-weight: bold; }
+        body { background-color: #0b0f1a; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .card { background-color: #161e2d; border: 1px solid #1e293b; border-radius: 16px; padding: 24px; }
+        input, select { background: #0f172a; border: 1px solid #334155; color: #38bdf8; padding: 10px; border-radius: 8px; width: 100%; font-weight: bold; }
+        label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; margin-bottom: 4px; display: block; }
+        .stat-val { font-size: 1.5rem; font-weight: 800; color: #f8fafc; }
+        .accent-green { color: #10b981; }
+        .accent-blue { color: #3b82f6; }
     </style>
 </head>
-<body class="p-4 md:p-10">
-    <div class="max-w-6xl mx-auto">
-        <h1 class="text-3xl font-bold mb-6 border-b border-slate-700 pb-2 text-center md:text-left">Dashboard Analisi Investimento</h1>
+<body class="p-4 md:p-8">
+    <div class="max-w-7xl mx-auto">
+        <header class="flex flex-col md:flex-row justify-between items-center mb-8 border-b border-slate-800 pb-6">
+            <div>
+                <h1 class="text-3xl font-black tracking-tight text-white">ENERGY ROI <span class="text-blue-500">OPTIMIZER</span></h1>
+                <p class="text-slate-500 text-sm">Analisi Ingegneristica Investimento Industriale</p>
+            </div>
+            <div class="text-right mt-4 md:mt-0">
+                <span class="bg-blue-500/10 text-blue-400 px-4 py-2 rounded-full text-xs font-bold border border-blue-500/20">REPORT PERSONALIZZATO 2026</span>
+            </div>
+        </header>
         
-        <div class="grid md:grid-cols-3 gap-6">
-            <div class="card md:col-span-1">
-                <h2 class="text-xl mb-4 text-slate-400 border-b border-slate-700 pb-2">Parametri</h2>
-                <label class="block mb-1 text-sm">Investimento Totale (€)</label>
-                <input type="number" id="inv" value="285000" oninput="calcola()">
-                
-                <label class="block mt-4 mb-1 text-sm">Risparmio Fotovoltaico (€/anno)</label>
-                <input type="number" id="rfv" value="67461" oninput="calcola()">
-                
-                <label class="block mt-4 mb-1 text-sm">Risparmio Ottimizzatore (€/anno)</label>
-                <input type="number" id="rot" value="5278" oninput="calcola()">
+        <div class="grid lg:grid-cols-4 gap-6">
+            <div class="lg:col-span-1 space-y-5">
+                <div class="card">
+                    <h3 class="text-sm font-bold mb-4 border-b border-slate-700 pb-2 uppercase">Input Operativi</h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label>Investimento Totale (€)</label>
+                            <input type="number" id="inv" value="285000" oninput="calcola()">
+                        </div>
+                        <div>
+                            <label>Consumo Annuo (kWh)</label>
+                            <input type="number" id="consumo" value="250000" oninput="calcola()">
+                        </div>
+                        <div>
+                            <label>Costo Energia Attuale (€/kWh)</label>
+                            <input type="number" id="costoKwh" value="0.25" step="0.01" oninput="calcola()">
+                        </div>
+                        <div>
+                            <label>Inflazione Energetica Annua (%)</label>
+                            <input type="number" id="inflazione" value="3" step="0.5" oninput="calcola()">
+                        </div>
+                        <div>
+                            <label>Risparmio Ottimizzatore (€/anno)</label>
+                            <input type="number" id="rot" value="5278" oninput="calcola()">
+                        </div>
+                        <div class="pt-2">
+                            <label class="flex items-center cursor-pointer bg-blue-500/5 p-3 rounded-lg border border-blue-500/20">
+                                <span class="mr-3 text-xs font-bold text-blue-400">LEGGE SABATINI</span>
+                                <input type="checkbox" id="sabCheck" class="sr-only peer" onchange="calcola()" checked>
+                                <div class="relative w-11 h-6 bg-slate-700 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
 
-                <div class="mt-6 p-4 bg-slate-800 rounded-lg">
-                    <label class="flex items-center cursor-pointer">
-                        <span class="mr-3 text-sm font-medium">Includi Legge Sabatini</span>
-                        <input type="checkbox" id="sabCheck" class="sr-only peer" onchange="calcola()">
-                        <div class="relative w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600 font-bold"></div>
-                    </label>
-                    <p class="text-[10px] text-slate-500 mt-2">Stimata al ~10% dell'investimento in 5 anni.</p>
+                <div class="card bg-gradient-to-br from-blue-900/20 to-transparent">
+                    <h3 class="text-xs font-bold text-slate-400 mb-2 uppercase">Impatto Ambientale</h3>
+                    <div class="stat-val text-emerald-400"><span id="co2">0</span> <span class="text-sm font-normal">Tons CO2/anno</span></div>
+                    <p class="text-[10px] text-slate-500 mt-2">Equivalente a circa <span id="alberi">0</span> alberi piantati ogni anno.</p>
                 </div>
             </div>
 
-            <div class="card md:col-span-2">
-                <h2 class="text-xl mb-4 text-slate-400">Proiezione Cash Flow</h2>
-                <canvas id="mainChart" height="150"></canvas>
-            </div>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-6 mt-6">
-            <div class="card">
-                <h2 class="text-xl mb-4 text-slate-400">Sintesi Benefici</h2>
-                <div class="space-y-4">
-                    <div class="flex justify-between"><span>Vantaggio Fiscale IRES (24%):</span> <span id="det-tot" class="highlight">0 €</span></div>
-                    <div id="sab-row" class="flex justify-between hidden text-amber-400"><span>Contributo Sabatini:</span> <span id="sab-val">0 €</span></div>
-                    <div class="flex justify-between border-t border-slate-700 pt-2 text-xl"><span>Payback Period:</span> <span id="payback" class="text-green-400 font-bold">0 anni</span></div>
+            <div class="lg:col-span-3 space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="card">
+                        <label>Vantaggio Fiscale IRES</label>
+                        <div class="stat-val text-blue-400" id="det-tot">0 €</div>
+                        <p class="text-[10px] text-slate-500">Recupero certo al 24%</p>
+                    </div>
+                    <div class="card">
+                        <label>Punto di Pareggio (Payback)</label>
+                        <div class="stat-val text-emerald-400" id="payback text-green-400">0 Anni</div>
+                        <p class="text-[10px] text-slate-500">Incluso incentivi e risparmi</p>
+                    </div>
+                    <div class="card">
+                        <label>Guadagno Netto (20 anni)</label>
+                        <div class="stat-val text-white" id="profit-20">0 €</div>
+                        <p class="text-[10px] text-slate-500 text-emerald-500">ROI Totale: <span id="roi-perc">0</span>%</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card overflow-x-auto">
-                <h2 class="text-xl mb-4 text-slate-400">Piano Rateale IRES</h2>
-                <table class="w-full text-left text-sm">
-                    <thead>
-                        <tr class="border-b border-slate-700 text-slate-500">
-                            <th class="p-2">Anno</th>
-                            <th class="p-2">Rata %</th>
-                            <th class="p-2 text-right">Importo Rata (€)</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabella-body"></tbody>
-                </table>
+                <div class="card">
+                    <h2 class="text-lg font-bold mb-4">Proiezione Cumulativa Cash Flow</h2>
+                    <canvas id="mainChart" height="120"></canvas>
+                </div>
+
+                <div class="card">
+                    <h2 class="text-lg font-bold mb-4">Dettaglio Flussi per il primo decennio</h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="text-slate-500 border-b border-slate-800">
+                                <tr>
+                                    <th class="pb-3">Anno</th>
+                                    <th class="pb-3 text-right">Risparmio Energia (€)</th>
+                                    <th class="pb-3 text-right">Rata IRES (€)</th>
+                                    <th class="pb-3 text-right font-bold">Flusso Cassa Tot. (€)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabella-body" class="divide-y divide-slate-800"></tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -77,56 +120,71 @@
 
         function calcola() {
             const inv = parseFloat(document.getElementById('inv').value) || 0;
-            const rfv = parseFloat(document.getElementById('rfv').value) || 0;
-            const rot = parseFloat(document.getElementById('rot').value) || 0;
+            const consumo = parseFloat(document.getElementById('consumo').value) || 0;
+            const costoKwh = parseFloat(document.getElementById('costoKwh').value) || 0;
+            const inflazione = (parseFloat(document.getElementById('inflazione').value) || 0) / 100;
+            const rotAnnuo = parseFloat(document.getElementById('rot').value) || 0;
             const hasSabatini = document.getElementById('sabCheck').checked;
 
-            // Logica IRES: 24% dell'investimento
             const detrazioneIRES = inv * 0.24;
-            document.getElementById('det-tot').innerText = detrazioneIRES.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
-
-            // Logica Sabatini: ~10% dell'investimento in 5 anni
             const totaleSabatini = hasSabatini ? inv * 0.10 : 0;
-            const sabRow = document.getElementById('sab-row');
-            if(hasSabatini) {
-                sabRow.classList.remove('hidden');
-                document.getElementById('sab-val').innerText = totaleSabatini.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
-            } else {
-                sabRow.classList.add('hidden');
-            }
+            
+            document.getElementById('det-tot').innerText = detrazioneIRES.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+            
+            // Ambiente
+            const co2Saved = (consumo * 0.7 * 0.4) / 1000; // 0.4kg per kWh media
+            document.getElementById('co2').innerText = co2Saved.toFixed(1);
+            document.getElementById('alberi').innerText = Math.round(co2Saved * 50);
 
-            const risparmioAnnuoEnergetico = rfv + rot;
-            const beneficioTotale = detrazioneIRES + totaleSabatini + (risparmioAnnuoEnergetico * 11);
-            const payback = inv / (risparmioAnnuoEnergetico + (detrazioneIRES/11) + (totaleSabatini/5));
-            document.getElementById('payback').innerText = payback.toFixed(1) + " anni";
-
-            // Popolamento Tabella Dinamica
-            let html = '';
             let chartLabels = [];
             let chartData = [];
+            let tableHtml = '';
             let cumulativo = -inv;
+            let totale20anni = -inv;
 
-            for (let i = 1; i <= 11; i++) {
-                let perc = (i === 1 || i === 11) ? 2.16 : 4.32;
-                let importoIRES = (detrazioneIRES / (11 * 4.32 / 100)) * (perc / 100); 
-                // Semplificazione per mantenere le tue proporzioni esatte sulle rate:
-                let quotaRata = (detrazioneIRES / 100) * (perc / 0.24); 
-                // Correzione matematica diretta per le tue percentuali su 11 rate:
-                let rataReale = detrazioneIRES * (perc / 43.2);
-
-                let quotaSabatini = (i <= 5) ? totaleSabatini / 5 : 0;
-                cumulativo += risparmioAnnuoEnergetico + rataReale + quotaSabatini;
+            for (let i = 1; i <= 20; i++) {
+                // Risparmio che cresce con inflazione
+                let risparmioEnergia = (consumo * costoKwh * 0.7 + rotAnnuo) * Math.pow(1 + inflazione, i - 1);
                 
-                chartLabels.push("Anno " + i);
-                chartData.push(cumulativo);
+                // Quote fiscali (11 anni)
+                let rataIres = 0;
+                if (i <= 11) {
+                    let perc = (i === 1 || i === 11) ? 2.16 : 4.32;
+                    rataIres = detrazioneIRES * (perc / 43.2);
+                }
 
-                html += `<tr class="border-b border-slate-800 hover:bg-slate-800/50 transition">
-                    <td class="p-2 text-slate-400">${2025 + i}</td>
-                    <td class="p-2">${perc}%</td>
-                    <td class="p-2 text-right font-mono text-blue-400">${rataReale.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}</td>
-                </tr>`;
+                // Sabatini (5 anni)
+                let quotaSabatini = (i <= 5 && hasSabatini) ? totaleSabatini / 5 : 0;
+
+                let flussoAnnuo = risparmioEnergia + rataIres + quotaSabatini;
+                cumulativo += flussoAnnuo;
+                totale20anni += flussoAnnuo;
+
+                if (i <= 11) {
+                    chartLabels.push("Anno " + i);
+                    chartData.push(cumulativo);
+                    tableHtml += `
+                        <tr class="hover:bg-slate-800/40">
+                            <td class="py-3 text-slate-500">${2025+i}</td>
+                            <td class="py-3 text-right">${risparmioEnergia.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}</td>
+                            <td class="py-3 text-right text-blue-400">${rataIres.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}</td>
+                            <td class="py-3 text-right font-bold text-emerald-400">+ ${flussoAnnuo.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}</td>
+                        </tr>
+                    `;
+                } else if (i <= 20) {
+                    chartLabels.push("Anno " + i);
+                    chartData.push(cumulativo);
+                }
             }
-            document.getElementById('tabella-body').innerHTML = html;
+
+            document.getElementById('tabella-body').innerHTML = tableHtml;
+            document.getElementById('profit-20').innerText = totale20anni.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+            document.getElementById('roi-perc').innerText = ((totale20anni / inv) * 100).toFixed(0);
+
+            // Calcolo Payback accurato
+            let pb = inv / ((consumo * costoKwh * 0.7 + rotAnnuo) + (detrazioneIRES / 11) + (totaleSabatini / 5));
+            document.getElementById('payback text-green-400').innerText = pb.toFixed(1) + " Anni";
+
             updateChart(chartLabels, chartData);
         }
 
@@ -138,21 +196,23 @@
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Cash Flow Cumulativo (€)',
+                        label: 'Liquidità Generata (€)',
                         data: data,
-                        borderColor: '#38bdf8',
-                        backgroundColor: 'rgba(56, 189, 248, 0.1)',
+                        borderColor: '#3b82f6',
+                        borderWidth: 3,
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
                         fill: true,
-                        tension: 0.3
+                        pointBackgroundColor: '#fff',
+                        tension: 0.2
                     }]
                 },
                 options: {
                     responsive: true,
+                    plugins: { legend: { display: false } },
                     scales: {
-                        y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' } },
-                        x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
-                    },
-                    plugins: { legend: { display: false } }
+                        y: { grid: { color: '#1e293b' }, ticks: { color: '#64748b' } },
+                        x: { grid: { display: false }, ticks: { color: '#64748b' } }
+                    }
                 }
             });
         }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Energy ROI Master Optimizer 2026</title>
+    <title>Energy ROI Master Optimizer 2026 - Versione Full</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -24,7 +24,7 @@
         <header class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-800 pb-6 gap-4">
             <div>
                 <h1 class="text-3xl font-black tracking-tighter text-white uppercase italic">Energy ROI <span class="text-blue-500">Master</span></h1>
-                <p class="text-slate-500 text-sm">Analisi Tecnica e Finanziaria Avanzata - Versione 2026</p>
+                <p class="text-slate-500 text-sm italic">Analisi Industriale 4.0 - BORLANDELLI E VOLPI SRL</p>
             </div>
             <div class="flex gap-3 no-print">
                 <button onclick="exportPDF()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg font-bold transition-all flex items-center gap-2">
@@ -35,34 +35,18 @@
         </header>
 
         <div class="grid lg:grid-cols-4 gap-6">
-            
             <div class="lg:col-span-1 space-y-4 no-print">
                 <div class="card border-t-4 border-blue-500">
-                    <h3 class="text-xs font-bold text-slate-400 mb-4 uppercase tracking-widest">Parametri Analisi</h3>
+                    <h3 class="text-xs font-bold text-slate-400 mb-4 uppercase tracking-widest">Incentivi 4.0</h3>
                     <div class="space-y-4">
-                        <div>
-                            <label>Consumo Annuo (kWh)</label>
-                            <input type="number" id="consumo" value="8942" oninput="calcola()">
-                        </div>
-                        <div>
-                            <label>Costo Energia (€/kWh)</label>
-                            <input type="number" id="costoKwh" value="0.268" step="0.001" oninput="calcola()">
-                        </div>
-                        <div>
-                            <label>Investimento Totale (€)</label>
-                            <input type="number" id="inv" value="20000" oninput="calcola()">
-                        </div>
-                        <div>
-                            <label>Efficienza Ottimizzatore (%)</label>
-                            <input type="number" id="optEff" value="7" step="1" oninput="calcola()">
-                        </div>
-                        <div>
-                            <label>Inflazione Energetica (%)</label>
-                            <input type="number" id="infl" value="3" step="0.5" oninput="calcola()">
-                        </div>
+                        <div><label>Investimento Totale (€)</label><input type="number" id="inv" value="20000" oninput="calcola()"></div>
+                        <div><label>Maggiorazione Iper Amm. (%)</label><input type="number" id="iperPerc" value="170" oninput="calcola()"></div>
+                        <div><label>Consumo Annuo (kWh)</label><input type="number" id="consumo" value="8942" oninput="calcola()"></div>
+                        <div><label>Costo Energia (€/kWh)</label><input type="number" id="costoKwh" value="0.268" step="0.001" oninput="calcola()"></div>
+                        <div><label>Eff. Ottimizzatore (%)</label><input type="number" id="optPerc" value="7" oninput="calcola()"></div>
                         <div class="pt-2">
                             <label class="flex items-center cursor-pointer bg-slate-800 p-3 rounded-lg border border-slate-700">
-                                <span class="mr-3 text-xs font-bold text-blue-400">LEGGE SABATINI (10%)</span>
+                                <span class="mr-3 text-xs font-bold text-blue-400 uppercase">SABATINI (10%)</span>
                                 <input type="checkbox" id="sabCheck" class="sr-only peer" onchange="calcola()" checked>
                                 <div class="relative w-11 h-6 bg-slate-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
                             </label>
@@ -72,45 +56,20 @@
             </div>
 
             <div class="lg:col-span-3 space-y-6">
-                
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div class="card border-l-4 border-blue-500">
-                        <label>Vantaggio IRES (24%)</label>
-                        <div class="stat-val text-blue-400 mono" id="ires-val">0 €</div>
-                    </div>
-                    <div class="card border-l-4 border-emerald-500">
-                        <label>Payback Time</label>
-                        <div class="stat-val text-emerald-400 mono" id="pb-val">0 Anni</div>
-                    </div>
-                    <div class="card border-l-4 border-amber-500">
-                        <label>Risp. Ottimizz./y</label>
-                        <div class="stat-val text-amber-500 mono" id="opt-val">0 €</div>
-                    </div>
-                    <div class="card border-l-4 border-white">
-                        <label>Guadagno Netto 20y</label>
-                        <div class="stat-val text-white mono" id="guadagno-20">0 €</div>
-                    </div>
+                    <div class="card border-l-4 border-blue-500"><label>Totale Detrazioni</label><div class="stat-val text-blue-400 mono" id="det-tot-val">0 €</div></div>
+                    <div class="card border-l-4 border-emerald-500"><label>Payback Time</label><div class="stat-val text-emerald-400 mono" id="pb-val">0 y</div></div>
+                    <div class="card border-l-4 border-amber-500"><label>Risp. Ottimizz./y</label><div class="stat-val text-amber-500 mono" id="opt-val">0 €</div></div>
+                    <div class="card border-l-4 border-white"><label>Guadagno 20y</label><div class="stat-val text-white mono" id="guadagno-20">0 €</div></div>
                 </div>
 
                 <div class="card">
-                    <h2 class="text-xs font-bold text-slate-500 uppercase mb-4 tracking-tighter">Proiezione Cash Flow Cumulativo 20 Anni (Savings + Fisco)</h2>
+                    <h2 class="text-xs font-bold text-slate-500 uppercase mb-4 tracking-tighter">Proiezione Cash Flow Cumulativo 20 Anni</h2>
                     <canvas id="mainChart" height="130"></canvas>
                 </div>
 
                 <div class="card overflow-x-auto">
-                    <h2 class="text-xs font-bold text-slate-500 uppercase mb-4">Dettaglio Flussi per il primo decennio</h2>
-                    <table class="w-full text-left text-sm mono">
-                        <thead>
-                            <tr class="text-slate-500 border-b border-slate-800 text-[10px]">
-                                <th class="pb-3 px-2 uppercase">Anno</th>
-                                <th class="pb-3 text-right uppercase text-slate-400">Risp. Fotovolt.</th>
-                                <th class="pb-3 text-right uppercase text-amber-500">Risp. Ottimizz.</th>
-                                <th class="pb-3 text-right uppercase text-blue-400">Fisco (IRES+Sab)</th>
-                                <th class="pb-3 text-right font-bold text-white uppercase italic">Flusso Netto</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tab-body" class="divide-y divide-slate-800"></tbody>
-                    </table>
+                    <table class="w-full text-left text-sm mono"><thead class="text-slate-500 border-b border-slate-800 uppercase text-[10px]"><tr><th class="pb-3">Anno</th><th class="pb-3 text-right">Risp. Energia</th><th class="pb-3 text-right">Risp. Ottimizz.</th><th class="pb-3 text-right text-blue-400 font-bold">Bonus Fiscale</th><th class="pb-3 text-right font-bold text-white uppercase italic">Flusso Netto</th></tr></thead><tbody id="tab-body" class="divide-y divide-slate-800 text-xs"></tbody></table>
                 </div>
             </div>
         </div>
@@ -118,116 +77,49 @@
 
     <script>
         let chart;
-
         function calcola() {
             const inv = parseFloat(document.getElementById('inv').value) || 0;
+            const iper = (parseFloat(document.getElementById('iperPerc').value) || 0) / 100;
             const cons = parseFloat(document.getElementById('consumo').value) || 0;
             const cost = parseFloat(document.getElementById('costoKwh').value) || 0;
-            const effOpt = (parseFloat(document.getElementById('optEff').value) || 0) / 100;
-            const infl = (parseFloat(document.getElementById('infl').value) || 0) / 100;
+            const effOpt = (parseFloat(document.getElementById('optPerc').value) || 0) / 100;
             const hasSab = document.getElementById('sabCheck').checked;
 
-            const totIres = inv * 0.24;
+            // Logica Iper Ammortamento: IRES 24% sul (Costo * (1 + Maggiorazione))
+            const baseAmmortizzabile = inv * (1 + iper);
+            const beneficioIRES = baseAmmortizzabile * 0.24;
             const totSab = hasSab ? inv * 0.10 : 0;
+            const detrazioneTotale = beneficioIRES + totSab;
             
-            document.getElementById('ires-val').innerText = totIres.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
-
-            // Calcolo Risparmio Ottimizzatore base (sulla quota del 30% non coperta dal fotovoltaico)
-            const risparmioOttimizzatoreBase = (cons * cost * 0.3) * effOpt;
-            document.getElementById('opt-val').innerText = risparmioOttimizzatoreBase.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+            document.getElementById('det-tot-val').innerText = detrazioneTotale.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+            const rispOptBase = (cons * cost * 0.3) * effOpt;
+            document.getElementById('opt-val').innerText = rispOptBase.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
 
             let labels = [], data = [], table = '', cumul = -inv;
-
             for (let i = 1; i <= 20; i++) {
-                let inflFact = Math.pow(1 + infl, i - 1);
-                
-                // Risparmio Fotovoltaico (70% autoconsumo)
-                let rEner = (cons * cost * 0.7) * inflFact;
-                
-                // Risparmio Ottimizzatore dinamico
-                let rOpt = risparmioOttimizzatoreBase * inflFact;
-                
-                let rIres = 0;
-                if (i <= 11) {
-                    let perc = (i === 1 || i === 11) ? 2.16 : 4.32;
-                    rIres = totIres * (perc / 43.2);
-                }
-
+                let rEner = (cons * cost * 0.7);
+                let rOpt = rispOptBase;
+                let rIres = (i <= 11) ? beneficioIRES * (((i === 1 || i === 11) ? 2.16 : 4.32) / 43.2) : 0;
                 let rSab = (i <= 5 && hasSab) ? totSab / 5 : 0;
-                let flussoAnnuo = rEner + rOpt + rIres + rSab;
-                
-                cumul += flussoAnnuo;
-
-                labels.push(i);
-                data.push(cumul);
-
+                let flusso = rEner + rOpt + rIres + rSab;
+                cumul += flusso;
+                labels.push(i); data.push(cumul);
                 if (i <= 11) {
-                    table += `
-                        <tr class="hover:bg-slate-800/50">
-                            <td class="py-3 px-2 text-slate-500 font-bold">${2025+i}</td>
-                            <td class="py-3 text-right">${rEner.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}</td>
-                            <td class="py-3 text-right text-amber-500">${rOpt.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}</td>
-                            <td class="py-3 text-right text-blue-400">${(rIres + rSab).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}</td>
-                            <td class="py-3 text-right font-bold text-emerald-400">+ ${flussoAnnuo.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}</td>
-                        </tr>`;
+                    table += `<tr class="hover:bg-slate-800/50"><td class="py-3 px-2 text-slate-500 font-bold">${2025+i}</td><td class="py-3 text-right">${rEner.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}</td><td class="py-3 text-right text-amber-500">${rOpt.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}</td><td class="py-3 text-right text-blue-400">${(rIres+rSab).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}</td><td class="py-3 text-right font-bold text-emerald-400">+ ${flusso.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}</td></tr>`;
                 }
             }
-
             document.getElementById('tab-body').innerHTML = table;
-            
-            // Visualizzazione Guadagno Netto a 20 Anni
             document.getElementById('guadagno-20').innerText = cumul.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
-            
-            // Calcolo Payback dinamico includendo ottimizzatore
-            let pb = inv / ( (cons*cost*0.7 + risparmioOttimizzatoreBase) + (totIres/11) + (totSab/5) );
-            document.getElementById('pb-val').innerText = pb.toFixed(1) + " Anni";
-
+            let pb = inv / ( (cons*cost*0.7 + rispOptBase) + (beneficioIRES/11) + (totSab/5) );
+            document.getElementById('pb-val').innerText = pb.toFixed(1) + " y";
             if (chart) chart.destroy();
-            chart = new Chart(document.getElementById('mainChart').getContext('2d'), {
-                type: 'line',
-                data: { labels: labels, datasets: [{ label: 'Liquidità Generata (€)', data: data, borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', fill: true, tension: 0.2 }] },
-                options: { 
-                    plugins: { 
-                        legend: { display: false },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return context.parsed.y.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
-                                }
-                            }
-                        }
-                    }, 
-                    scales: { 
-                        y: { 
-                            grid: { color: '#1e293b' }, 
-                            ticks: { 
-                                color: '#64748b',
-                                callback: function(value) {
-                                    return value.toLocaleString('it-IT', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
-                                }
-                            } 
-                        }, 
-                        x: { 
-                            title: { display: true, text: 'Anni di esercizio', color: '#64748b' },
-                            grid: { display: false }, 
-                            ticks: { color: '#64748b' } 
-                        } 
-                    } 
-                }
-            });
+            chart = new Chart(document.getElementById('mainChart').getContext('2d'), { type: 'line', data: { labels: labels, datasets: [{ label: 'Liquidità (€)', data: data, borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', fill: true, tension: 0.2 }] }, options: { plugins: { legend: { display: false } }, scales: { y: { grid: { color: '#1e293b' }, ticks: { color: '#64748b' } }, x: { grid: { display: false }, ticks: { color: '#64748b' } } } } });
         }
-
         function exportPDF() {
             const el = document.getElementById('report-content');
             const btns = document.querySelectorAll('.no-print');
             btns.forEach(b => b.style.display = 'none');
-            const opt = { 
-                margin: 0.5, 
-                filename: 'Analisi_ROI_Master_Energy_20y.pdf', 
-                html2canvas: { scale: 2, backgroundColor: '#020617' }, 
-                jsPDF: { orientation: 'landscape' } 
-            };
-            html2pdf().set(opt).from(el).save().then(() => btns.forEach(b => b.style.display = 'flex'));
+            html2pdf().set({ margin: 0.5, filename: 'Report_ROI_Energy_IperAmm.pdf', html2canvas: { scale: 2, backgroundColor: '#020617' }, jsPDF: { orientation: 'landscape' } }).from(el).save().then(() => btns.forEach(b => b.style.display = 'flex'));
         }
         calcola();
     </script>
